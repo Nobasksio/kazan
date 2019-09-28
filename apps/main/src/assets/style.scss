@@ -8,3 +8,31 @@
   font-family: fsb;
   src: url(./fonts/FSRAIL75.ttf);
 }
+
+body {
+  font-family: fsb;
+}
+
+.s-pointer {
+  cursor: pointer;
+}
+
+
+.v-form.s-cab .v-input,
+.v-input.s-cab
+{
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &:not(.error--text) {
+
+    .v-input__slot {
+      margin-bottom: 0;
+    }
+
+    .v-text-field__details {
+      display: none;
+    }
+  }
+}

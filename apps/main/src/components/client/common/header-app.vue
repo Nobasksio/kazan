@@ -30,10 +30,9 @@
 
 <script >
     export default {
-        name: "header",
         methods: {
             onShowNav() {
-                alert('ff');
+                this.$bus.emit('showNav');
             }
         }
     }

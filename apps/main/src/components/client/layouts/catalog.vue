@@ -2,7 +2,7 @@
 
     <div>
 
-        <AppCommon></AppCommon>
+        <AppCommon :showBasketHandler="true"></AppCommon>
 
         <v-content>
 

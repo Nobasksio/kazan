@@ -2,10 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
-import Vuex from 'vuex';
+import VueBus from 'vue-bus';
 
 Vue.config.productionTip = false
 
+Vue.use(VueBus);
 Vue.use(VueRouter)
 
 import routes from './routes'
@@ -22,6 +23,7 @@ const store = typeof createStore === 'function'
     : createStore
 
 
+
 new Vue({
   vuetify,
   store,
@@ -31,3 +33,5 @@ new Vue({
 
 
 require('./assets/style.scss')
+import 'swiper/dist/css/swiper.css'
+

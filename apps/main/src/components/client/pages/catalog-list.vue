@@ -6,6 +6,8 @@
 
         </HeaderApp>
 
+        <TrainRouteHorizontal></TrainRouteHorizontal>
+
         <div class="c-catalog">
 
             <div class="c-filters mb-1">
@@ -126,10 +128,12 @@
 
 <script>
     import HeaderApp from './../common/header-app'
+    import TrainRouteHorizontal from './../common/train-route-horizontal'
 
     export default {
         components: {
-            HeaderApp
+            HeaderApp,
+            TrainRouteHorizontal
         },
         data: () => ({
             pageTitle: 'Каталог',
