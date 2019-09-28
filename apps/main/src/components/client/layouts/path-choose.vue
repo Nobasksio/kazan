@@ -68,6 +68,7 @@
             make_choose(id_station){
 
 
+                this.$router.push('/client/catalog/list')
                 this.station.forEach((item,i,arr)=>{
                     if (item.id != id_station){
                         item.choosen = false
