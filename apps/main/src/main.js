@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
+import Vuex from 'vuex';
 
 Vue.config.productionTip = false
 
@@ -14,8 +15,16 @@ const router = new VueRouter({
   routes
 })
 
+import createStore from './store/index'
+
+const store = typeof createStore === 'function'
+    ? createStore({Vue})
+    : createStore
+
+
 new Vue({
   vuetify,
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import entity from './entity'
-import app from './app'
+import client from './client'
 
 Vue.use(Vuex)
 
@@ -14,7 +14,7 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      app,
+      client,
       entity
     },
 
