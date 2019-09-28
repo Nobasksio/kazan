@@ -41,6 +41,16 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ves;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +112,30 @@ class Product
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getVes(): ?int
+    {
+        return $this->ves;
+    }
+
+    public function setVes(int $ves): self
+    {
+        $this->ves = $ves;
 
         return $this;
     }

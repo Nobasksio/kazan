@@ -98,16 +98,6 @@ class AppFixtures extends Fixture
             $manager->persist($train);
         }
 
-        $train_array = [
-            'Иркутск - Москва', 'Иркутск - Владивосток'
-        ];
-
-        foreach ($train_array as $item){
-            $train = new Train();
-            $train->setName($item);
-
-            $manager->persist($train);
-        }
 
 
         $station_array = [
@@ -215,6 +205,101 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
+
+
+        $product_array2 = [
+            ['name'=>'Филадельфия лайт',
+                'price'=>320,
+                'description' => 'Семга, сливочный сыр, трюфель, луковые чипсы, соус «Терияки» ',
+                'ves'=> 280,
+                'cat' => 'Роллы'
+                ],
+            ['name'=>'Сяке маки',
+                'price'=>220,
+                'description' => 'Сёмга, огурец.',
+                'ves'=> 180,
+                'cat' => 'Роллы'
+            ],
+            ['name'=>'Пицца пеперони',
+                'price'=>520,
+                'description' => 'Пицца соус, сыр моцарелла, грибы шампиньоны, колбаса пепперони сырокопченая ',
+                'ves'=> 880,
+                'cat' => 'Пицца'
+            ],
+            ['name'=>'Пицца маргарита',
+                'price'=>720,
+                'description' => 'Пицца соус, сыр Моцарелла, жульен, куриная грудка, лук зеленый. ',
+                'ves'=> 980,
+                'cat' => 'Пицца'
+            ],
+            ['name'=>'Рамен',
+                'price'=>280,
+                'description' => 'Пицца соус, сыр Моцарелла, жульен, куриная грудка, лук зеленый.',
+                'ves'=> 550,
+                'cat' => 'Супы'
+            ],
+            ['name'=>'Том ям',
+                'price'=>390,
+                'description' => 'Креветка, кальмар, курица, кокосовое молоко, помидоры черри, грибы шиитаке, лемонграсс, имбирь, перец чили, лайм,кинза',
+                'ves'=> 380,
+                'cat' => 'Супы'
+            ],
+            ['name'=>'Эби темпура',
+                'price'=>340,
+                'description' => 'Креветки в темпуре, миндаль, кунжут, соус "Терияки"',
+                'ves'=> 150,
+                'cat' => 'Горячее'
+            ],
+            ['name'=>'Ояко дон',
+                'price'=>320,
+                'description' => 'Курица, шампиньоны, яйцо, рис, соус "Ояко дон", соус "Терияки',
+                'ves'=> 280,
+                'cat' => 'Горячее'
+            ],
+            ['name'=>'Цезарь Тори',
+                'price'=>220,
+                'description' => 'Копчёная курица, лист салата, сыр “Пармезан”, хрустящие чипсы, помидоры черри, соус “Цезарь”.',
+                'ves'=> 200,
+                'cat' => 'Салаты'
+            ],
+            ['name'=>'Фунчоза со свининой ',
+                'price'=>195,
+                'description' => 'Тонкая фунчоза, морковь, огурец, свинина в соусе “Креветочный чили”, лист салата, кунжут ',
+                'ves'=> 170,
+                'cat' => 'Салаты'
+            ],
+            ['name'=>'Шокомания',
+                'price'=>280,
+                'description' => 'Шоколад, сливочный сыр, соус "Маракуйя", миндаль',
+                'ves'=> 200,
+                'cat' => 'Десерты'
+            ],
+            ['name'=>'Маффин "Зеленый чай" ',
+                'price'=>190,
+                'description' => 'Бисквит "Зелёный чай", манго, соус "Сливочно-шоколадный"',
+                'ves'=> 180,
+                'cat' => 'Десерты'
+            ],
+        ];
+
+
+        foreach ($product_array2 as $item){
+             $prodcut = new Product();
+            $prodcut->setName($item['name']);
+            $prodcut->setPrice($item['price']);
+            $prodcut->setDescription($item['description']);
+            $prodcut->setVes($item['ves']);
+
+            $product_cat = $this->pcr->findOneBy(['name'=>$item['cat']]);
+
+            $prodcut->setProductCat($product_cat);
+
+            $manager->persist($prodcut);
+        }
+
+        $manager->flush();
+
 
     }
 }
