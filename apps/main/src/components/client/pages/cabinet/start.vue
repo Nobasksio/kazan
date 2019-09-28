@@ -177,7 +177,7 @@
     </div >
 
 </template >
-import  from './../../../../assets/client_style.css';
+
 <script >
     export default {
         data: () => ({
