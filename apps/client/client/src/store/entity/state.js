@@ -1,0 +1,8 @@
+export default {
+  entities: {
+    order: {
+
+    }
+  },
+
+}
