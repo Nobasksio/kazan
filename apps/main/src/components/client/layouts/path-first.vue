@@ -1,11 +1,8 @@
 <template >
-    <div class="con-h100">
-        <div class="page1" v-if="show1" >
-            <v-container class="con-h100 my-regular" >
-                <v-row class="flex-column justify-space-between con-h100" >
-                    <v-col class="text-center " >
-                        <div >
-                            <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="h-100" >
+        <div class="h-100" v-if="show1">
+            <div class="logo_fix text-center" >
+                <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 455 111.8" style="enable-background:new 0 0 455 111.8;" xml:space="preserve">
                     <g>
                         <g>
@@ -35,33 +32,28 @@
                     </g>
                 </svg>
 
-                        </div >
-                        <div class="mt-2 my-bold" >
-                            Путешествие<br >
-                            это одно из лучших событий <br >
-                            в жизни.
-                        </div >
-                    </v-col >
-                    <v-col class="text-center ft d-flex flex-column align-center justify-center" >
-
-                        <div class="white--text  px-4 text50m" >
-                            Но путешествие - это не просто
-                            перемещение из пункта А в пункт Б
-                        </div >
-                        <div class="text-center mt-6 botton-fix" >
-                            <v-btn rounded class="red darken-1 white--text my-bold" @click="setshow2" >А что же ещё?
+            </div >
+            <v-row class="h-100" >
+                <v-col class="d-flex flex-column align-center justify-center" >
+                    <div class="text-center pb-10" > Давайте определим ваш маршрут</div >
+                    <div >
+                        <div class="text-center py-3 " >
+                            <v-btn rounded class="red darken-1 white--text my-bold px-10 min-widthb" @click="setshow2" >
+                                По номеру билета
                             </v-btn >
                         </div >
-                    </v-col >
-                </v-row >
-            </v-container >
+                        <div class="text-center" >
+                            <v-btn rounded class="red darken-1 white--text my-bold px-10 min-widthb" @click="setshow3" >
+                                По геолокации
+                            </v-btn >
+                        </div >
+                    </div >
+                </v-col >
+            </v-row >
         </div >
-        <div class="page2" v-if="show2" >
-            <v-container class="con-h100 my-regular" >
-                <v-row class="flex-column justify-space-between con-h100" >
-                    <v-col class="text-center " >
-                        <div >
-                            <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <div class="h-100" v-if="show2">
+            <div class="logo_fix text-center" >
+                <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 455 111.8" style="enable-background:new 0 0 455 111.8;" xml:space="preserve">
                     <g>
                         <g>
@@ -91,37 +83,31 @@
                     </g>
                 </svg>
 
-                        </div >
-                        <div class="mt-2 " >
-                            Путешествие<br>
-                            это знакомство с культурой<br>
-                            тех мест, с которыми сталкиваешься<br>
-                            <br>
-                            Вам повезло!<br>
-                            <br>
-                            Потому что Россия это самая<br>
-                            большая страна,<br>
-                            объединяющая огромное<br>
-                            количество культур<br>
-                        </div >
-                    </v-col >
-                    <v-col class="text-center ft d-flex flex-column align-center justify-center" >
+            </div >
+            <v-row class="h-100" >
+                <v-col class="d-flex flex-column align-center justify-center" >
+                    <div class="text-center pb-10" >Введите номер билета</div >
+                    <div >
+                        <div class="text-center py-3 " >
+                            <v-text-field
+                                    label="Filled"
+                                    placeholder="Например: U6 1743 35556663 3444367"
+                                    solo
+                            ></v-text-field>
 
-
-                        <div class="text-center mt-6 botton-fix" >
-                            <v-btn rounded class="red darken-1 white--text my-bold" @click="setshow3" >Далее
+                        </div >
+                        <div class="text-center my-n3" >
+                            <v-btn rounded class="red darken-1 white--text my-bold px-10 min-widthb" @click="go_to_path()" >
+                                Далее
                             </v-btn >
                         </div >
-                    </v-col >
-                </v-row >
-            </v-container >
+                    </div >
+                </v-col >
+            </v-row >
         </div >
-        <div class="page3" v-if="show3" >
-            <v-container class="con-h100 my-regular" >
-                <v-row class="flex-column justify-space-between con-h100" >
-                    <v-col class="text-center " >
-                        <div >
-                            <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <div class="h-100" v-if="show3">
+            <div class="logo_fix text-center" >
+                <svg version="1.1" id="Слой_1" class='logorjd' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 455 111.8" style="enable-background:new 0 0 455 111.8;" xml:space="preserve">
                     <g>
                         <g>
@@ -151,41 +137,46 @@
                     </g>
                 </svg>
 
-                        </div >
-                        <div class="text3 " >
-                            И теперь у вас как есть<br>
-                            уникальная возможность<br>
-                            превратить свою поездку с РЖД<br>
-                            в увлекательное<br>
-                            гастрономическое приключение!<br>
-                        </div >
-                    </v-col >
-                    <v-col class="text-center ft d-flex flex-column align-center justify-center" >
+            </div >
+            <v-row class="h-100" >
+                <v-col class="d-flex flex-column align-center justify-center" >
+                    <div class="text-center pb-10" >По вашей геолокации не найдено поездов</div >
+                    <div class="text-center pb-10" >Введите номер билета</div >
+                    <div >
+                        <div class="text-center py-3 " >
+                            <v-text-field
+                                    label="Filled"
+                                    placeholder="Например: U6 1743 35556663 3444367"
+                                    solo
+                            ></v-text-field>
 
-                        <div class="text-center mt-6 botton-fix0" >
-                            <v-btn rounded class=" darken-1 white--text my-bold" outlined @click="go_to_path" >Хочу просто вкусно есть
+                        </div >
+                        <div class="text-center my-n3" >
+                            <v-btn rounded class="red darken-1 white--text my-bold px-10 min-widthb" @click="go_to_path" >
+                                Далее
                             </v-btn >
                         </div >
-                        <div class="text-center mt-6 botton-fix" >
-                            <v-btn rounded class="red darken-1 white--text my-bold" @click="go_to_path" >Хочу вкусно есть и квест
-                            </v-btn >
-                        </div >
-                    </v-col >
-                </v-row >
-            </v-container >
+                    </div >
+                </v-col >
+            </v-row >
         </div >
     </div >
-
 </template >
 
 <script >
+    import headerApp from '../common/header-app';
+
     export default {
-        data: () => ({
-            drawer: true,
-            show1: true,
-            show2: false,
-            show3: false,
-        }),
+        components: {
+            headerApp
+        },
+        data: function () {
+            return {
+                show1: true,
+                show2:false,
+                show3:false,
+            }
+        },
         methods: {
             setshow2() {
                 this.show1 = false,
@@ -193,92 +184,42 @@
 
             },
             setshow3() {
-                this.show2 = false,
+                this.show1 = false,
                     this.show3 = true
 
             },
             go_to_path(){
-                this.$router.push('/client/path_1')
+                this.$router.push('/client/path')
             }
-        }
-    };
+        },
+        name: "path-first"
+    }
 </script >
 
 <style scoped >
-
     .st0 {
         fill: #D45A4C;
     }
 
     .st1 {
-        fill: #FFFFFF;
-    }
-
-    .page1 {
-        width: 100%;
-        height: 100%;
-        background-image: url('./../../../../assets/page1.jpg');
-        background-size: cover;
-        line-height: 20px;
-    }
-    .page2 {
-        width: 100%;
-        height: 100%;
-        background-image: url('./../../../../assets/page2.jpg');
-        background-size: cover;
-        line-height: 20px;
-    }
-    .page3 {
-        width: 100%;
-        height: 100%;
-        background-image: url('./../../../../assets/page3.jpg');
-        background-size: cover;
-        line-height: 20px;
-    }
-
-    .ft {
-
+        fill: #000000;
     }
 
     .logorjd {
         margin-top: 20px;
-        width: 50%;
+        width: 30%;
     }
 
-    .con-h100 {
+    .logo_fix {
+        position: fixed;
+        top: 30px
+    }
+
+    .h-100 {
         height: 100%;
     }
 
-    .text50m {
-        margin-top: 100px;
-    }
-    .text3{
-        margin-top: 70px;
-    }
-
-    @font-face {
-        font-family: fsr;
-        src: url(./../../../../assets/fonts/FSRAIL55.ttf);
-    }
-
-    @font-face {
-        font-family: fsb;
-        src: url(./../../../../assets/fonts/FSRAIL75.ttf);
-    }
-
-    .my-bold {
-        font-family: fsb;
-    }
-
-    .my-regular {
-        font-family: fsr;
-    }
-    .botton-fix0{
-        position: fixed;
-        bottom: 90px;
-    }
-    .botton-fix {
-        position: fixed;
-        bottom: 40px;
+    .min-widthb {
+        width: 325px;
     }
 </style >

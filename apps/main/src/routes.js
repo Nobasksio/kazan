@@ -25,6 +25,14 @@ const routes = [
 
         ]
     },
+    {
+        path: '/client/path_1',
+        component: () => import('./components/client/layouts/path-first.vue'),
+
+        children: [
+
+        ]
+    },
 
     {
         path: '/client/catalog',
