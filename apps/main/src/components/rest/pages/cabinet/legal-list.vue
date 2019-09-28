@@ -9,6 +9,22 @@
                 :items-per-page="5"
                 class="elevation-1"
         >
+            <template v-slot:item.contract_name="{ item }">
+
+
+                <div v-if="!item.contract_id">
+
+                    <router-link :to="`/contract/create`">создать договор</router-link>
+
+                </div>
+                <div v-else>
+
+                    <router-link :to="`/contract/${item.contract_id}/view`">{{item.contract_name}}</router-link>
+
+                </div>
+
+            </template>
+
             <template v-slot:item.action="{ item }">
 
                 <v-icon
@@ -30,6 +46,7 @@
 
         </v-data-table>
 
+
     </div>
 
 </template>
@@ -44,51 +61,38 @@
         },
         data: () => ({
 
-            pageTitle: 'Заказы',
+            dateFromMenu: false,
+            dateToMenu: false,
+
+            pageTitle: 'Юридические лица',
 
             headers: [
                 {text: 'ID', value: 'id'},
-                {text: 'Клиент', value: 'user_name'},
-                {text: 'Цена', value: 'price'},
-                {text: 'Станция', value: 'stantion_name'},
-                {text: 'Время доставки', value: 'deliver_time'},
-                {text: 'Статус', value: 'status_name'},
+                {text: 'Наименование', value: 'name'},
+                {text: 'Актуальный договор', value: 'contract_name'},
                 {text: 'Действия', value: 'action', sortable: false},
             ],
+
             data: [
                 {
                     id: 1,
-                    created: '28.09.2019',
-                    deliver_time: '28.09.2019 14:00',
-                    user_name: 'Иванов Иван',
-                    user_phone: '79501102996',
-                    stantion_name: 'Станция 1',
-                    status_name: 'новый',
-                    price: 2400,
-                    basket: [
-
-                    ]
+                    name: 'ООО Рестоклуб',
+                    contract_id: 1,
+                    contract_name: '№234 от 09.09.2019'
                 },
                 {
                     id: 2,
-                    created: '28.09.2019',
-                    deliver_time: '28.09.2019 14:00',
-                    user_name: 'Петров Петр',
-                    user_phone: '79501102996',
-                    stantion_name: 'Станция 2',
-                    status_name: 'новый',
-                    price: 2400,
-                    basket: [
-
-                    ]
-                }
+                    name: 'ИП Иванов',
+                    contract_id: 0,
+                    contract_name: ''
+                },
             ]
         }),
 
         methods: {
+
             editItem(item) {
-                this.$router.push({path: `/rest/cabinet/order/${item.id}/view`}).catch(err => {
-                })
+                this.$router.push({path: `/rest/cabinet/legal/${item.id}/edit`}).catch(err => {})
             },
 
             deleteItem() {

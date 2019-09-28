@@ -43,41 +43,52 @@
             PageTitle
         },
         data: () => ({
-            pageTitle: 'Меню',
+
+            pageTitle: 'Все заказы',
 
             headers: [
                 {text: 'ID', value: 'id'},
-                {text: 'Наименование', value: 'name'},
+                {text: 'Клиент', value: 'user_name'},
                 {text: 'Цена', value: 'price'},
-                {text: 'Категория', value: 'cat'},
-                {text: 'Ресторан', value: 'rest'},
+                {text: 'Станция', value: 'stantion_name'},
+                {text: 'Время доставки', value: 'deliver_time'},
+                {text: 'Статус', value: 'status_name'},
                 {text: 'Действия', value: 'action', sortable: false},
             ],
             data: [
                 {
                     id: 1,
-                    name: 'Ресторан 1',
-                    price: 400,
-                    cat: 'Салаты'
+                    created: '28.09.2019',
+                    deliver_time: '28.09.2019 14:00',
+                    user_name: 'Иванов Иван',
+                    user_phone: '79501102996',
+                    stantion_name: 'Станция 1',
+                    status_name: 'новый',
+                    price: 2400,
+                    basket: [
+
+                    ]
                 },
                 {
                     id: 2,
-                    name: 'Ресторан 2',
-                    price: 500,
-                    cat: 'Горячее'
-                },
-                {
-                    id: 2,
-                    name: 'Ресторан 2',
-                    price: 500,
-                    cat: 'Роллы'
-                },
+                    created: '28.09.2019',
+                    deliver_time: '28.09.2019 14:00',
+                    user_name: 'Петров Петр',
+                    user_phone: '79501102996',
+                    stantion_name: 'Станция 2',
+                    status_name: 'новый',
+                    price: 2400,
+                    basket: [
+
+                    ]
+                }
             ]
         }),
 
         methods: {
             editItem(item) {
-                this.$router.push({path: `/rest/cabinet/menu/${item.id}/edit`}).catch(err => {})
+                this.$router.push({path: `/rest/cabinet/order/${item.id}/view`}).catch(err => {
+                })
             },
 
             deleteItem() {

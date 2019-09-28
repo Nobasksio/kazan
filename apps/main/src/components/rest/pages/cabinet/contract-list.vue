@@ -9,6 +9,22 @@
                 :items-per-page="5"
                 class="elevation-1"
         >
+            <template v-slot:item.contract_name="{ item }">
+
+
+                <div v-if="!item.contract_id">
+
+                    <router-link :to="`/contract/create`">создать договор</router-link>
+
+                </div>
+                <div v-else>
+
+                    <router-link :to="`/contract/${item.contract_id}/view`">{{item.contract_name}}</router-link>
+
+                </div>
+
+            </template>
+
             <template v-slot:item.action="{ item }">
 
                 <v-icon
@@ -30,6 +46,7 @@
 
         </v-data-table>
 
+
     </div>
 
 </template>
@@ -43,41 +60,44 @@
             PageTitle
         },
         data: () => ({
-            pageTitle: 'Меню',
+
+            dateFromMenu: false,
+            dateToMenu: false,
+
+            pageTitle: 'Договоры',
 
             headers: [
                 {text: 'ID', value: 'id'},
                 {text: 'Наименование', value: 'name'},
-                {text: 'Цена', value: 'price'},
-                {text: 'Категория', value: 'cat'},
-                {text: 'Ресторан', value: 'rest'},
+                {text: 'Юр. лицо', value: 'legal_name'},
+                {text: 'Дата создания', value: 'created_date'},
+                {text: 'Дата подписания', value: 'confirm_date'},
+                {text: 'Дата окончания', value: 'end_date'},
                 {text: 'Действия', value: 'action', sortable: false},
             ],
+
             data: [
                 {
                     id: 1,
-                    name: 'Ресторан 1',
-                    price: 400,
-                    cat: 'Салаты'
+                    name: 'О сотрудничестве',
+                    legal_name: 'ООО Рестоклуб',
+                    contract_id: 1,
+                    contract_name: '№234 от 09.09.2019'
                 },
                 {
                     id: 2,
-                    name: 'Ресторан 2',
-                    price: 500,
-                    cat: 'Горячее'
-                },
-                {
-                    id: 2,
-                    name: 'Ресторан 2',
-                    price: 500,
-                    cat: 'Роллы'
+                    name: 'О сотрудничестве',
+                    legal_name: 'ИП Иванов',
+                    contract_id: 0,
+                    contract_name: ''
                 },
             ]
         }),
 
         methods: {
+
             editItem(item) {
-                this.$router.push({path: `/rest/cabinet/menu/${item.id}/edit`}).catch(err => {})
+                this.$router.push({path: `/rest/cabinet/legal/${item.id}/edit`}).catch(err => {})
             },
 
             deleteItem() {

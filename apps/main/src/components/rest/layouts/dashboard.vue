@@ -18,20 +18,67 @@
             <v-list dense>
 
                 <v-list-item to="/rest/cabinet/profile">
-                    Ваш профиль
+                    <v-list-item-title>Профиль</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/rest/cabinet/legal/list">
+                    <v-list-item-title>Юридические лица</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/rest/cabinet/contract/list">
+                    <v-list-item-title>Договора</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item to="/rest/cabinet/rest/list">
-                    Ваши рестораны
+                    <v-list-item-title>Рестораны</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item to="/rest/cabinet/menu/list">
-                    Меню
+                    <v-list-item-title>Меню</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item to="/rest/cabinet/order/list">
-                    Заказы
-                </v-list-item>
+
+                <v-list-group
+                >
+                    <template v-slot:activator>
+
+                        <v-list-item-title>Заказы</v-list-item-title>
+
+                    </template>
+
+                    <div class="pl-3">
+
+                        <v-list-item to="/rest/cabinet/order/list/queue">
+                            <v-list-item-title>Очередь</v-list-item-title>
+                        </v-list-item>
+
+                        <v-list-item to="/rest/cabinet/order/list/all">
+                            <v-list-item-title>Архив</v-list-item-title>
+                        </v-list-item>
+
+                    </div>
+
+                </v-list-group>
+
+
+                <v-list-group
+                        value="true"
+                >
+                    <template v-slot:activator>
+
+                        <v-list-item-title>Отчеты</v-list-item-title>
+
+                    </template>
+
+                    <div class="pl-3">
+
+                        <v-list-item to="/rest/cabinet/report/orders">
+                            <v-list-item-title>По заказам</v-list-item-title>
+                        </v-list-item>
+
+                    </div>
+
+                </v-list-group>
 
             </v-list>
 

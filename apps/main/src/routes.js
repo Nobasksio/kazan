@@ -29,8 +29,19 @@ const routes = [
       { path: '/rest/cabinet/menu/list', component: () => import('./components/rest/pages/cabinet/menu-list.vue'), },
       { path: '/rest/cabinet/menu/:id/edit', component: () => import('./components/rest/pages/cabinet/menu-edit.vue'), },
 
-      { path: '/rest/cabinet/order/list', component: () => import('./components/rest/pages/cabinet/order-list.vue'), },
+      { path: '/rest/cabinet/order/list/queue', component: () => import('./components/rest/pages/cabinet/order-list-queue.vue'), },
+      { path: '/rest/cabinet/order/list/all', component: () => import('./components/rest/pages/cabinet/order-list-all.vue'), },
       { path: '/rest/cabinet/order/:id/view', component: () => import('./components/rest/pages/cabinet/order-view.vue'), },
+
+      { path: '/rest/cabinet/report/orders', component: () => import('./components/rest/pages/cabinet/report-orders.vue'), },
+
+      { path: '/rest/cabinet/legal/list', component: () => import('./components/rest/pages/cabinet/legal-list.vue'), },
+      { path: '/rest/cabinet/legal/:id/edit', component: () => import('./components/rest/pages/cabinet/legal-edit.vue'), },
+
+      { path: '/rest/cabinet/contract/list', component: () => import('./components/rest/pages/cabinet/contract-list.vue'), },
+      { path: '/rest/cabinet/contract/:id/edit', component: () => import('./components/rest/pages/cabinet/contract-edit.vue'), },
+      { path: '/rest/cabinet/contract/:id/view', component: () => import('./components/rest/pages/cabinet/contract-view.vue'), },
+
     ]
   },
 
