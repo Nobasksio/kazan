@@ -53,6 +53,11 @@ class Rest
      */
     private $kitchen_type;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -247,6 +252,18 @@ class Rest
         if ($this->kitchen_type->contains($kitchenType)) {
             $this->kitchen_type->removeElement($kitchenType);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
