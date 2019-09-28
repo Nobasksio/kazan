@@ -44,7 +44,7 @@ class User
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderEntity", mappedBy="user")
      */
     private $orders;
 

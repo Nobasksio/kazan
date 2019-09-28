@@ -29,7 +29,7 @@ class Rest
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="rest")
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderEntity", mappedBy="rest")
      */
     private $orders;
 

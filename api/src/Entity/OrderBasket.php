@@ -17,7 +17,7 @@ class OrderBasket
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderBaskets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrderEntity", inversedBy="orderBaskets")
      */
     private $order_entity;
 
@@ -31,7 +31,7 @@ class OrderBasket
         return $this->id;
     }
 
-    public function getOrderEntity(): ?Order
+    public function getOrderEntity(): ?OrderEntity
     {
         return $this->order_entity;
     }

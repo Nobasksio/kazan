@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190928202129 extends AbstractMigration
+final class Version20190928215805 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,10 @@ final class Version20190928202129 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE `order` (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, rest_id INT DEFAULT NULL, arrival_time INT NOT NULL, INDEX IDX_F5299398A76ED395 (user_id), INDEX IDX_F52993987D8D3163 (rest_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE order_entity (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, rest_id INT DEFAULT NULL, arrival_time INT NOT NULL, INDEX IDX_CDA754BDA76ED395 (user_id), INDEX IDX_CDA754BD7D8D3163 (rest_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE train (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE kitchen_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE product (id INT AUTO_INCREMENT NOT NULL, rest_id INT DEFAULT NULL, kitchen_type_id INT DEFAULT NULL, product_cat_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, price INT NOT NULL, INDEX IDX_D34A04AD7D8D3163 (rest_id), INDEX IDX_D34A04ADD14D6881 (kitchen_type_id), INDEX IDX_D34A04AD84D1E8E7 (product_cat_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE product_cat (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, login VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, is_rest TINYINT(1) NOT NULL, type VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE order_status (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -35,9 +38,12 @@ final class Version20190928202129 extends AbstractMigration
         $this->addSql('CREATE TABLE rest_kitchen_type (rest_id INT NOT NULL, kitchen_type_id INT NOT NULL, INDEX IDX_E7D50F267D8D3163 (rest_id), INDEX IDX_E7D50F26D14D6881 (kitchen_type_id), PRIMARY KEY(rest_id, kitchen_type_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE name (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE station (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F5299398A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F52993987D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id)');
-        $this->addSql('ALTER TABLE order_basket ADD CONSTRAINT FK_E1C940AE3DA206A5 FOREIGN KEY (order_entity_id) REFERENCES `order` (id)');
+        $this->addSql('ALTER TABLE order_entity ADD CONSTRAINT FK_CDA754BDA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE order_entity ADD CONSTRAINT FK_CDA754BD7D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id)');
+        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD7D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id)');
+        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04ADD14D6881 FOREIGN KEY (kitchen_type_id) REFERENCES kitchen_type (id)');
+        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD84D1E8E7 FOREIGN KEY (product_cat_id) REFERENCES product_cat (id)');
+        $this->addSql('ALTER TABLE order_basket ADD CONSTRAINT FK_E1C940AE3DA206A5 FOREIGN KEY (order_entity_id) REFERENCES order_entity (id)');
         $this->addSql('ALTER TABLE train_route ADD CONSTRAINT FK_B1CBB1B123BCD4D0 FOREIGN KEY (train_id) REFERENCES train (id)');
         $this->addSql('ALTER TABLE train_route ADD CONSTRAINT FK_B1CBB1B121BDB235 FOREIGN KEY (station_id) REFERENCES station (id)');
         $this->addSql('ALTER TABLE rest_worktime ADD CONSTRAINT FK_6D1702A87D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id)');
@@ -48,9 +54,6 @@ final class Version20190928202129 extends AbstractMigration
         $this->addSql('ALTER TABLE rest_station ADD CONSTRAINT FK_AC45899921BDB235 FOREIGN KEY (station_id) REFERENCES station (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE rest_kitchen_type ADD CONSTRAINT FK_E7D50F267D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE rest_kitchen_type ADD CONSTRAINT FK_E7D50F26D14D6881 FOREIGN KEY (kitchen_type_id) REFERENCES kitchen_type (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD7D8D3163 FOREIGN KEY (rest_id) REFERENCES rest (id)');
-        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04ADD14D6881 FOREIGN KEY (kitchen_type_id) REFERENCES kitchen_type (id)');
-        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD84D1E8E7 FOREIGN KEY (product_cat_id) REFERENCES product_cat (id)');
     }
 
     public function down(Schema $schema) : void
@@ -59,11 +62,14 @@ final class Version20190928202129 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE order_basket DROP FOREIGN KEY FK_E1C940AE3DA206A5');
+        $this->addSql('ALTER TABLE train_route DROP FOREIGN KEY FK_B1CBB1B123BCD4D0');
+        $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04ADD14D6881');
+        $this->addSql('ALTER TABLE rest_kitchen_type DROP FOREIGN KEY FK_E7D50F26D14D6881');
         $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD84D1E8E7');
-        $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F5299398A76ED395');
+        $this->addSql('ALTER TABLE order_entity DROP FOREIGN KEY FK_CDA754BDA76ED395');
         $this->addSql('ALTER TABLE rest_user DROP FOREIGN KEY FK_FBF0850CA76ED395');
+        $this->addSql('ALTER TABLE order_entity DROP FOREIGN KEY FK_CDA754BD7D8D3163');
         $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD7D8D3163');
-        $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F52993987D8D3163');
         $this->addSql('ALTER TABLE rest_worktime DROP FOREIGN KEY FK_6D1702A87D8D3163');
         $this->addSql('ALTER TABLE rest_user DROP FOREIGN KEY FK_FBF0850C7D8D3163');
         $this->addSql('ALTER TABLE rest_station DROP FOREIGN KEY FK_AC4589997D8D3163');
@@ -71,7 +77,10 @@ final class Version20190928202129 extends AbstractMigration
         $this->addSql('ALTER TABLE train_route DROP FOREIGN KEY FK_B1CBB1B121BDB235');
         $this->addSql('ALTER TABLE rest_worktime DROP FOREIGN KEY FK_6D1702A821BDB235');
         $this->addSql('ALTER TABLE rest_station DROP FOREIGN KEY FK_AC45899921BDB235');
-        $this->addSql('DROP TABLE `order`');
+        $this->addSql('DROP TABLE order_entity');
+        $this->addSql('DROP TABLE train');
+        $this->addSql('DROP TABLE kitchen_type');
+        $this->addSql('DROP TABLE product');
         $this->addSql('DROP TABLE product_cat');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE order_status');
@@ -84,6 +93,5 @@ final class Version20190928202129 extends AbstractMigration
         $this->addSql('DROP TABLE rest_kitchen_type');
         $this->addSql('DROP TABLE name');
         $this->addSql('DROP TABLE station');
-        $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04ADD14D6881');
     }
 }
