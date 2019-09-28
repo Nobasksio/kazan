@@ -50,14 +50,20 @@
                 {text: 'ID', value: 'id'},
                 {text: 'Клиент', value: 'user_name'},
                 {text: 'Цена', value: 'price'},
-                {text: 'Станция', value: 'stantion'},
+                {text: 'Станция', value: 'stantion_name'},
+                {text: 'Время доставки', value: 'deliver_time'},
+                {text: 'Статус', value: 'status_name'},
                 {text: 'Действия', value: 'action', sortable: false},
             ],
             data: [
                 {
                     id: 1,
                     created: '28.09.2019',
+                    deliver_time: '28.09.2019 14:00',
                     user_name: 'Иванов Иван',
+                    user_phone: '79501102996',
+                    stantion_name: 'Станция 1',
+                    status_name: 'новый',
                     price: 2400,
                     basket: [
 
@@ -66,8 +72,12 @@
                 {
                     id: 2,
                     created: '28.09.2019',
-                    user_name: 'Петров петр',
-                    price: 1000,
+                    deliver_time: '28.09.2019 14:00',
+                    user_name: 'Петров Петр',
+                    user_phone: '79501102996',
+                    stantion_name: 'Станция 2',
+                    status_name: 'новый',
+                    price: 2400,
                     basket: [
 
                     ]

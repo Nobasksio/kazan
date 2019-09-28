@@ -8,8 +8,13 @@ const routes = [
   },
 
   {
-    path: '/client',
-    component: () => import('./components/client/pages/index.vue'),
+    path: '/client/cabinet',
+    component: () => import('./components/client/layouts/dashboard.vue'),
+    children: [
+      { path: '', component: () => import('./components/client/pages/cabinet/start.vue') },
+      { path: '/client/cabinet/profile', component: () => import('./components/client/pages/cabinet/profile.vue'), },
+
+    ]
   },
 
   {
