@@ -42,13 +42,9 @@
 
                     <div class="c-manu-cat-items">
 
-                        <div v-for="menuItem in menuCatItems(catItem)">
+                        <CatalogMenuItem :item="menuItem" v-for="menuItem in menuCatItems(catItem)">
 
-                            {{menuItem.title}}<br>
-
-                            {{menuItem.price}}
-
-                        </div>
+                        </CatalogMenuItem>
 
                     </div>
 
@@ -64,10 +60,11 @@
 
 <script>
 
+    import CatalogMenuItem from './../common/catalog-menu-item'
 
     export default {
         components: {
-
+            CatalogMenuItem
         },
         data: () => ({
             pageTitle: 'Каталог',

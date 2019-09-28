@@ -19,3 +19,6 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+
+require('./assets/style.scss')
