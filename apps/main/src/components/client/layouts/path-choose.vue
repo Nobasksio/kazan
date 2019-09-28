@@ -8,15 +8,16 @@
             <v-col class="text-right mr-5">Время прибытия</v-col>
         </v-row>
         <v-timeline dense clipped class="pr-5">
+
             <v-timeline-item
                     class="mb-2 "
                     color="grey"
                     :icon-color="item.choosen +' lighten-2'"
 
                     small
-                    v-key="item.id"
+                    :key="item.id"
                     v-for="item in station"
-                    @click="make_choose(item.id)"
+                    @click.native="make_choose(item.id)"
             >
                 <v-row justify="space-between">
                     <v-col cols="6"><div class="float-left">{{ item.name }}</div><div class="rest_numb">15</div></v-col>
@@ -65,6 +66,8 @@
         },
         methods:{
             make_choose(id_station){
+
+
                 this.station.forEach((item,i,arr)=>{
                     if (item.id != id_station){
                         item.choosen = false
