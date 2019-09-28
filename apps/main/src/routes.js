@@ -13,7 +13,15 @@ const routes = [
     children: [
       { path: '', component: () => import('./components/client/pages/cabinet/start.vue') },
       { path: '/client/cabinet/profile', component: () => import('./components/client/pages/cabinet/profile.vue'), },
+    ]
+  },
 
+  {
+    path: '/client/catalog',
+    component: () => import('./components/client/layouts/catalog.vue'),
+    children: [
+      { path: '/client/catalog/list', component: () => import('./components/client/pages/catalog-list.vue'), },
+      { path: '/client/catalog/rest/:id', component: () => import('./components/client/pages/catalog-rest.vue'), },
     ]
   },
 

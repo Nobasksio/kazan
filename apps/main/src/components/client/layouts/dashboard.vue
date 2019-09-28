@@ -27,9 +27,10 @@
 
         <v-content>
             <v-container
-                    class="fill-height"
+                    class="fill-height pa-0"
                     fluid
             >
+
                 <div style="width: 100%">
 
                     <router-view/>
