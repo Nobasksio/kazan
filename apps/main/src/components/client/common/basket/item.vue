@@ -8,14 +8,14 @@
 
                 <v-col class="c-image pr-3" cols="3">
 
-                    <img :src="item.image" >
+                    <img :src="`/images/product${item.product_id}.jpg`" >
 
                 </v-col>
 
                 <v-col class="c-info" cols="9">
 
                     <div class="c-name">
-                        {{itemName}}
+                        {{item.name}}
                     </div>
 
                     <v-container class="pa-0 mt-2">
@@ -95,15 +95,6 @@
       }
     },
     computed: {
-      itemName () {
-        let parts = this.item.title.split('#')
-        return parts[0]
-      },
-
-      itemDesc () {
-        let parts = this.item.title.split('#')
-        return parts[1]
-      },
 
       price () {
         return Math.round(this.item.price)
