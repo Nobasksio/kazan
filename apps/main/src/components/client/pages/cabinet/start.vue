@@ -163,11 +163,11 @@
                     <v-col class="text-center ft d-flex flex-column align-center justify-center" >
 
                         <div class="text-center mt-6 botton-fix0" >
-                            <v-btn rounded class=" darken-1 white--text my-bold" outlined @click="go_to_path" >Хочу просто вкусно есть
+                            <v-btn rounded class=" darken-1 white--text my-bold" outlined @click="go_to_path(0)" >Хочу просто вкусно есть
                             </v-btn >
                         </div >
                         <div class="text-center mt-6 botton-fix" >
-                            <v-btn rounded class="red darken-1 white--text my-bold" @click="go_to_path" >Хочу вкусно есть и квест
+                            <v-btn rounded class="red darken-1 white--text my-bold" @click="go_to_path(1)" >Хочу вкусно есть и квест
                             </v-btn >
                         </div >
                     </v-col >
@@ -197,7 +197,8 @@
                     this.show3 = true
 
             },
-            go_to_path(){
+            go_to_path(state){
+                window.localStorage['withQuest'] = state;
                 this.$router.push('/client/path_1')
             }
         }
