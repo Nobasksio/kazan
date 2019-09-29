@@ -4,33 +4,14 @@ const routes = [
         component: () => import('./components/index.vue')
     },
 
-    {
-        path: '/client/',
-        component: () => import('./components/client/pages/cabinet/start.vue'),
-
-        children: [
-            {path: '', component: () => import('./components/client/pages/cabinet/start.vue')},
-            {
-                path: '/client/cabinet/profile',
-                component: () => import('./components/client/pages/cabinet/profile.vue'),
-            },
-        ]
-    },
 
     {
-        path: '/client/path',
-        component: () => import('./components/client/layouts/path-choose.vue'),
-
+        path: '/client/start',
+        component: () => import('./components/client/layouts/clean.vue'),
         children: [
-
-        ]
-    },
-    {
-        path: '/client/path_1',
-        component: () => import('./components/client/layouts/path-first.vue'),
-
-        children: [
-
+            {path: '/client/start/welcome', component: () => import('./components/client/pages/start-welcome.vue'),},
+            {path: '/client/start/choose-train', component: () => import('./components/client/pages/start-choose-train.vue'),},
+            {path: '/client/start/choose-stantion', component: () => import('./components/client/pages/start-choose-stantion.vue'),},
         ]
     },
 
