@@ -242,7 +242,7 @@ class MainController extends AbstractController {
             $basket->setOrderEntity($order);
 
             $basket->setProductId($basket_item['product_id']);
-            $basket->setOrderEntity($basket_item['quantity']);
+            $basket->setQuantity($basket_item['quantity']);
 
             $entityManager->persist($basket);
         }
