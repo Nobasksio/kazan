@@ -1,3 +1,11 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+api_dictionary:
+  path: /api/dictionary
+  controller: App\Controller\MainController::index
+
+train_list:
+  path: /api/train/list
+  controller: App\Controller\MainController::train_list
+
+train_route:
+  path: /api/train/route
+  controller: App\Controller\MainController::train_route
