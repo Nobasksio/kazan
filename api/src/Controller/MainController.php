@@ -104,18 +104,33 @@ class MainController extends AbstractController {
 
 			if (!array_key_exists($key, $products)) continue;
 
+			if ($products[$key]->getKitchenType()){
+			    $kt_id = $products[$key]->getKitchenType()->getId();
+                $kt_name = $products[$key]->getKitchenType()->getName();
+            } else {
+                $kt_id = null;
+                $kt_name = null;
+            }
+
+            if ($products[$key]->getProductCat()){
+                $ct_id = $products[$key]->getProductCat()->getId();
+                $ct_name = $products[$key]->getProductCat()->getName();
+            } else {
+                $kt_id = null;
+                $kt_name = null;
+            }
 			$products_arr[] = [
 				'id'           => $products[$key]->getId(),
 				'name'         => $products[$key]->getName(),
 				'description'  => $products[$key]->getDescription(),
 				'price'        => $products[$key]->getPrice(),
 				'kitchen_type' => [
-					'id'   => $products[$key]->getKitchenType()->getId(),
+					'id'   => $kt_id,
 					'name' => $products[$key]->getKitchenType()->getName(),
 				],
 				'product_cat'  => [
-					'id' => $products[$key]->getProductCat()->getId(),
-					'id' => $products[$key]->getProductCat()->getName(),
+					'id' => $ct_id,
+					'name' => $ct_name
 				],
 				'ves'          => $products[$key]->getVes(),
 			];
