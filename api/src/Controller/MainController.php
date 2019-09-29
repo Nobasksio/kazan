@@ -7,6 +7,7 @@ use App\Entity\OrderEntity;
 use App\Entity\Rest;
 use App\Entity\TrainRoute;
 use App\Repository\KitchenTypeRepository;
+use App\Repository\OrderRepository;
 use App\Repository\ProductCatRepository;
 use App\Repository\ProductRepository;
 use App\Repository\RestRepository;
@@ -280,6 +281,48 @@ class MainController extends AbstractController {
 
         $response = json_encode( [
             'order' => $array_order,
+        ] );
+
+        return JsonResponse::fromJsonString( $response );
+    }
+
+    public function orders(Request $request,
+                          OrderRepository $orderRepository,
+                          StationRepository $stationRepository,
+                          ProductRepository $productRepository,
+                          RestRepository $restRepository) {
+
+
+        $orders = $orderRepository->findAll();
+
+        $arr_orders = [];
+
+        foreach ($orders as $orderEntity) {
+            $order_baskets = $orderEntity->get();
+
+            $product_arr = [];
+            foreach ($order_baskets as $basket_item) {
+                $product = $productRepository->findOneBy(['id' => $basket_item->getProductId()]);
+                if ($product) {
+                    $product_arr[] = ['name' => $product->getName(),
+                        'id' => $product->getId(),
+                        'quantity' => $basket_item->getQuantity()
+                    ];
+                }
+            }
+            $array_order = [
+                'id' => $orderEntity->getId(),
+                'phone' => $orderEntity->getPhone(),
+                'delivery_time' => $orderEntity->getDeliveryTime(),
+                'rest_id' => $orderEntity->getRest()->getId(),
+                'products' => $product_arr,
+            ];
+
+            $arr_orders[] = $array_order;
+        }
+
+        $response = json_encode( [
+            'orders' => $arr_orders,
         ] );
 
         return JsonResponse::fromJsonString( $response );
