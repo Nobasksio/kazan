@@ -220,6 +220,6 @@
     }
 
     .min-widthb {
-        width: 325px;
+        width: 250px;
     }
 </style >
