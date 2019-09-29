@@ -278,7 +278,7 @@ export const mutations = {
     state.items.push({
       hash : hash,
       product_id : product.id,
-      title : product.title,
+      name : product.name,
       price : customPrice || product.price,
       quantity : quantity,
       image : product.basket_image,

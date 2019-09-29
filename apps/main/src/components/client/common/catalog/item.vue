@@ -2,11 +2,12 @@
 
     <div class="com">
 
+
         <v-row no-gutters class="c-header">
 
             <v-col cols="5" class="pr-3">
 
-                <img :src="`http://eda.loc/images/pizza%202.jpg`" class="c-image">
+                <img :src="`/images/product${item.id}.jpg`" class="c-image">
 
             </v-col>
 
@@ -14,15 +15,15 @@
 
                 <div class="c-title mb-2">
 
-                    {{item.title}}
+                    {{item.name}}
 
-                    <span class="c-weight" v-if="item.weight">{{item.weight}} гр.</span>
+                    <span class="c-weight" v-if="item.ves">{{item.ves}} гр.</span>
 
                 </div>
 
-                <div class="c-desc" v-if="item.desc">
+                <div class="c-desc" v-if="item.description">
 
-                    {{item.desc}}
+                    {{item.description}}
 
                 </div>
 

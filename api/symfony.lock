@@ -162,6 +162,9 @@
     "swiftmailer/swiftmailer": {
         "version": "v6.2.1"
     },
+    "symfony/annotations-pack": {
+        "version": "v1.0.0"
+    },
     "symfony/asset": {
         "version": "v4.3.4"
     },

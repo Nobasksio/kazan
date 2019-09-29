@@ -36,6 +36,7 @@
                         <basket-items
                                 :itemIs="itemIs"
                                 :itemsMaxHeight="itemsMaxHeight"
+
                         ></basket-items >
 
                     </div >

@@ -9,3 +9,13 @@ train_list:
 train_route:
   path: /api/train/route
   controller: App\Controller\MainController::train_route
+
+rest_list:
+  path: /api/rest/list
+  controller: App\Controller\MainController::rest_list
+
+rest_load:
+  path: /api/rest/{id}/load
+  controller: App\Controller\MainController::rest_load
+
+

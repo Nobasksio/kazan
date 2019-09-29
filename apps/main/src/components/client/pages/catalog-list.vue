@@ -6,7 +6,6 @@
 
         <TrainRouteHorizontal @change="onRouteChange" :routeId="currentRouteId" :routes="result.routes" v-if="result.routes.length>0"></TrainRouteHorizontal>
 
-
         <div class="c-catalog" v-if="result.rests.length">
 
             <div class="c-filters mb-1">
@@ -17,11 +16,13 @@
                         class="c-filters-cats"
                         hide-slider
                         v-model="clientFilters.catIndex"
+                        v-if="tabsVisible"
                 >
 
                     <v-tab
                             :ripple="false"
                             v-if="catsFiltered.length"
+                            :key="0"
                     >
                         Все
                     </v-tab>
@@ -150,6 +151,7 @@
         data: () => ({
             pageTitle: 'Каталог',
 
+            tabsVisible: true,
             currentRouteId: window.localStorage['currentRouteId'],
             currentRouteStationName: window.localStorage['currentRouteStationName'],
 
@@ -269,10 +271,19 @@
 
             onRouteChange(item) {
 
-                this.currentRouteId = window.localStorage['currentRouteId'] = item.id;
-                this.currentRouteStationName = window.localStorage['currentRouteStationName'] = item.station_name;
+                this.tabsVisible = false
 
-                this.clientFilters.catIndex = 0;
+                this.$nextTick(()=>{
+
+                    this.clientFilters.catIndex = 0;
+
+                    this.tabsVisible = true
+
+                    this.currentRouteId = window.localStorage['currentRouteId'] = item.id;
+                    this.currentRouteStationName = window.localStorage['currentRouteStationName'] = item.station_name;
+
+
+                })
 
             },
 
