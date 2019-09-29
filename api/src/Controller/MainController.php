@@ -61,29 +61,28 @@ class MainController extends AbstractController {
 	 */
 	public function rest_list( RestRepository $restRepository, Request $request, StationRepository $stationRepository ) {
 
-
-		$station_id = $request->request->get( 'station_id' );
-
 		$rests = $restRepository->findAll();
 
 		$len = count( $rests );
 
 		$rest_arr = [];
 
-		for ( $i = 0; $i < 5; $i ++ ) {
-			$key = rand( 0, $len - 1 );
-
-			$rest_arr[] = [
-				'id'          => $rests[$key]->getId(),
-				'name'        => $rests[$key]->getName(),
-				'description' => $rests[$key]->getDescription(),
-			];
-		}
+		$data = [
+			[ 'id' => 1, 'name' => 'Sushi Studio',       'cats' => [ 1 ], 'stations' => [21] ],
+			[ 'id' => 2, 'name' => 'Бургер кинг',        'cats' => [ 3 ], 'stations' => [21] ],
+			[ 'id' => 3, 'name' => 'KFC',                'cats' => [ 3 ], 'stations' => [21] ],
+			[ 'id' => 4, 'name' => 'DODO pizza',         'cats' => [ 2 ], 'stations' => [21] ],
+			[ 'id' => 5, 'name' => 'Чайхана №1',         'cats' => [ 7 ], 'stations' => [21] ],
+			[ 'id' => 6, 'name' => 'Zuma',               'cats' => [ 7 ], 'stations' => [21] ],
+			[ 'id' => 7, 'name' => 'Black Star Burgers', 'cats' => [ 3 ], 'stations' => [21] ],
+			[ 'id' => 8, 'name' => 'Фарш',               'cats' => [ 6 ], 'stations' => [21] ],
+			[ 'id' => 9, 'name' => 'Антрекот',           'cats' => [ 6, 3 ], 'stations' => [21] ],
+			[ 'id' => 10, 'name' => 'Антрекот Ангарск',   'cats' => [ 6, 3 ], 'stations' => [22] ],
+		];
 
 		$response = json_encode( [
-			'rests' => $rest_arr
+			'rests' => $data
 		] );
-
 
 		return JsonResponse::fromJsonString( $response );
 	}
@@ -97,28 +96,29 @@ class MainController extends AbstractController {
 
 		$len      = count( $products );
 		$len_resp = rand( 3, 6 );
+
+
 		for ( $i = 0; $i < $len_resp; $i ++ ) {
+
 			$key = rand( 0, $len - 1 );
 
-			try {
-                $products_arr[] = [
-                    'id' => $products['$key']->getId(),
-                    'name' => $products['$key']->getName(),
-                    'description' => $products['$key']->getDescription(),
-                    'price' => $products['$key']->getPrice(),
-                    'kitchen_type' => [
-                        'id' => $products['$key']->getKitchenType()->getId(),
-                        'name' => $products['$key']->getKitchenType()->getName(),
-                    ],
-                    'product_cat' => [
-                        'id' => $products['$key']->getProductCat()->getId(),
-                        'id' => $products['$key']->getProductCat()->getName(),
-                    ],
-                    'ves' => $products['$key']->getVes(),
-                ];
-            } catch (Exception $exception){
+			if (!array_key_exists($key, $products)) continue;
 
-            }
+			$products_arr[] = [
+				'id'           => $products[$key]->getId(),
+				'name'         => $products[$key]->getName(),
+				'description'  => $products[$key]->getDescription(),
+				'price'        => $products[$key]->getPrice(),
+				'kitchen_type' => [
+					'id'   => $products[$key]->getKitchenType()->getId(),
+					'name' => $products[$key]->getKitchenType()->getName(),
+				],
+				'product_cat'  => [
+					'id' => $products[$key]->getProductCat()->getId(),
+					'id' => $products[$key]->getProductCat()->getName(),
+				],
+				'ves'          => $products[$key]->getVes(),
+			];
 		}
 
 		$rest_arr = [
@@ -154,7 +154,7 @@ class MainController extends AbstractController {
 		}
 
 		$response = json_encode( [
-			'trains'  => $train_result,
+			'trains' => $train_result,
 		] );
 
 		return JsonResponse::fromJsonString( $response );
@@ -169,23 +169,23 @@ class MainController extends AbstractController {
 
 		$train_id = $request->request->get( 'train_id' );
 
-		$routes = $trainRouteRepository->findBy(array('train' => $_GET['train_id']));
+		$routes = $trainRouteRepository->findBy( array( 'train' => $_GET['train_id'] ) );
 
 		$routes_result = [];
 
 		foreach ( $routes as $item ) {
 			$routes_result[] = [
-				'id'   => $item->getId(),
-				'train_id' => $item->getTrain()->getId(),
-				'station_id' => $item->getStation()->getId(),
-				'station_name' => $item->getStation()->getName(),
-				'arrival_time' => $item->getArrivalTime(),
+				'id'             => $item->getId(),
+				'train_id'       => $item->getTrain()->getId(),
+				'station_id'     => $item->getStation()->getId(),
+				'station_name'   => $item->getStation()->getName(),
+				'arrival_time'   => $item->getArrivalTime(),
 				'departure_time' => $item->getDepartureTime(),
 			];
 		}
 
 		$response = json_encode( [
-			'routes'  => $routes_result,
+			'routes' => $routes_result,
 		] );
 
 		return JsonResponse::fromJsonString( $response );
