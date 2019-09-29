@@ -308,7 +308,7 @@
 
         display: inline-block;
         position: fixed;
-        bottom: 20px;
+        bottom: 50px;
         z-index: 200;
 
         left: 50%;

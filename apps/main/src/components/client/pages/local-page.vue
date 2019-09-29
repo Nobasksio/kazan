@@ -32,7 +32,7 @@
 
         <div class="c-hero-image">
 
-            <v-img height="200px" src=""></v-img>
+            <v-img height="200px" src="../../../assets/dominos-cayman.png"></v-img>
 
         </div>
 
@@ -59,34 +59,26 @@
 
                 </div>
 
-                <div class="ml-auto">
 
-                    <div class="c-item-timer">
-
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="15" height="15" rx="4" fill="#F2994A"/>
-                            <path d="M7.5 2C4.475 2 2 4.475 2 7.5C2 10.525 4.475 13 7.5 13C10.525 13 13 10.525 13 7.5C13 4.475 10.525 2 7.5 2ZM7.5 11.9C5.08 11.9 3.1 9.92 3.1 7.5C3.1 5.08 5.08 3.1 7.5 3.1C9.92 3.1 11.9 5.08 11.9 7.5C11.9 9.92 9.92 11.9 7.5 11.9Z" fill="white"/>
-                            <path d="M7.77507 4.75H6.95007V8.05L9.81007 9.81L10.2501 9.095L7.77507 7.61V4.75Z" fill="white"/>
-                        </svg>
-
-
-                        <span class="c-item-timer-value">
-                            00:30:21
-                        </span>
-
-                    </div>
-
-                </div>
 
             </div>
 
             <div class="c-item-teaser mb-4">
 
-                {{model.teaser}}
+                <div>
+
+                    <span class="black--text ">Позы </span>– это национальное блюдо бурятской и монгольской кухни, имеющее сходство с хинкали и мантами.
+                </div>
+                <div class="mt-2">
+
+                    <span class="black--text ">Байкальский омуль </span>– это национальное блюдо бурятской и монгольской кухни, имеющее сходство с хинкали и мантами.
+                </div>
+
+
 
             </div>
 
-            <div class="c-item-price">Минимальная сумма заказа от <span class="value">{{model.min_price}} ₽</span></div>
+
 
             <div class="c-menu mt-4">
 
@@ -111,7 +103,7 @@
             </div>
 
         </div>
-        <dostW></dostW>
+
     </div>
 
 </template>
@@ -120,11 +112,9 @@
 
     import CatalogMenuItem from './../common/catalog/item'
 
-    import dostW from './../common/dost-widget'
     export default {
         components: {
-            CatalogMenuItem,
-            dostW
+            CatalogMenuItem
         },
         data: () => ({
             pageTitle: 'Каталог',
@@ -132,11 +122,11 @@
             cats: [
                 {
                     id: 1,
-                    title: 'Суши'
+                    title: 'Позы'
                 },
                 {
                     id: 2,
-                    title: 'Пицца'
+                    title: 'Омуль'
                 },
                 {
                     id: 3,
@@ -162,7 +152,7 @@
 
             model: {
                 id: 1,
-                name: 'Pizza Italy',
+                name: 'Иркутская Область',
                 rating: 3.4,
                 min_price: 400,
                 teaser: 'Международная сеть ресторанов фастфуда, которая входит в число',
