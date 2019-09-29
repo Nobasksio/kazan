@@ -38,11 +38,17 @@ class Station
      */
     private $trainRoutes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderEntity", mappedBy="station")
+     */
+    private $orderEntities;
+
     public function __construct()
     {
         $this->restWorktimes = new ArrayCollection();
         $this->rests = new ArrayCollection();
         $this->trainRoutes = new ArrayCollection();
+        $this->orderEntities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,6 +152,37 @@ class Station
             // set the owning side to null (unless already changed)
             if ($trainRoute->getStation() === $this) {
                 $trainRoute->setStation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderEntity[]
+     */
+    public function getOrderEntities(): Collection
+    {
+        return $this->orderEntities;
+    }
+
+    public function addOrderEntity(OrderEntity $orderEntity): self
+    {
+        if (!$this->orderEntities->contains($orderEntity)) {
+            $this->orderEntities[] = $orderEntity;
+            $orderEntity->setStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderEntity(OrderEntity $orderEntity): self
+    {
+        if ($this->orderEntities->contains($orderEntity)) {
+            $this->orderEntities->removeElement($orderEntity);
+            // set the owning side to null (unless already changed)
+            if ($orderEntity->getStation() === $this) {
+                $orderEntity->setStation(null);
             }
         }
 
