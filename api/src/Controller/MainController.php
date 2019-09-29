@@ -251,4 +251,38 @@ class MainController extends AbstractController {
 
     }
 
+    public function order(OrderEntity $orderEntity, Request $request,
+                             StationRepository $stationRepository,
+                             ProductRepository $productRepository,
+                             RestRepository $restRepository) {
+
+
+        $order_baskets = $orderEntity->getOrderBaskets();
+
+        $product_arr = [];
+        foreach ($order_baskets as $basket_item){
+            $product = $productRepository->findOneBy(['id'=>$basket_item->getProductId()]);
+            if ($product) {
+                $product_arr[] = ['name' => $product->getName(),
+                    'id'=>$product->getId(),
+                    'quantity'=>$basket_item->getQuantity()
+                ];
+                }
+        }
+        $array_order = [
+            'id' => $orderEntity->getId(),
+            'phone' => $orderEntity->getPhone(),
+            'delivery_time' => $orderEntity->getDeliveryTime(),
+            'rest_id' => $orderEntity->getRest()->getId(),
+            'products' =>$product_arr,
+            'id' => $orderEntity->getId(),
+            ];
+
+        $response = json_encode( [
+            'order' => $array_order,
+        ] );
+
+        return JsonResponse::fromJsonString( $response );
+    }
+
 }

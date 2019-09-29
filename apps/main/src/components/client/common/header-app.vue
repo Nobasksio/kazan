@@ -19,7 +19,7 @@
             </v-col>
 
             <v-col class="text-right">
-              
+
 
             </v-col>
         </v-row>
