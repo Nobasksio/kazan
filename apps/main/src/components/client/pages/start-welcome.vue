@@ -44,7 +44,7 @@
                     </v-col >
                     <v-col class="text-center ft d-flex flex-column align-center justify-center" >
 
-                        <div class="white--text  px-4 text50m" >
+                        <div class="white--text  px-4 text50m text12">
                             Но путешествие - это не просто
                             перемещение из пункта А в пункт Б
                         </div >
@@ -280,5 +280,8 @@
     .botton-fix {
         position: fixed;
         bottom: 40px;
+    }
+    .text12{
+        font-size: 11px;
     }
 </style >
