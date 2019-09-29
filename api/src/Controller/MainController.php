@@ -88,7 +88,7 @@ class MainController extends AbstractController {
 	}
 
 	/**
-	 * ("/api/rest/{id}/load", name="rest_station", methods={GET})
+	 * ("/api/rest/{id}/load", name="rest_single", methods={GET})
 	 */
 	public function rest_load( Rest $rest, ProductRepository $productRepository ) {
 
@@ -138,7 +138,7 @@ class MainController extends AbstractController {
 
 
 	/**
-	 * ("/api/train/list", name="rest_station", methods={GET})
+	 * ("/api/train/list", name="train_station", methods={GET})
 	 */
 	public function train_list( TrainRepository $trainRepository ) {
 
@@ -163,7 +163,7 @@ class MainController extends AbstractController {
 
 
 	/**
-	 * ("/api/train/list", name="rest_station", methods={GET})
+	 * ("/api/train/list", name="rest_station2", methods={GET})
 	 */
 	public function train_route( Request $request, TrainRouteRepository $trainRouteRepository ) {
 
