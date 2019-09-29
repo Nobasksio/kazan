@@ -74,9 +74,9 @@ class MainController extends AbstractController {
 			$key = rand( 0, $len - 1 );
 
 			$rest_arr[] = [
-				'id'          => $rests['$key']->getId(),
-				'name'        => $rests['$key']->getName(),
-				'description' => $rests['$key']->getDescription(),
+				'id'          => $rests[$key]->getId(),
+				'name'        => $rests[$key]->getName(),
+				'description' => $rests[$key]->getDescription(),
 			];
 		}
 
