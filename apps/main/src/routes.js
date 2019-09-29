@@ -1,9 +1,8 @@
 const routes = [
     {
         path: '/',
-        component: () => import('./components/index.vue')
+        redirect: '/client/start/welcome'
     },
-
 
     {
         path: '/client/start',
