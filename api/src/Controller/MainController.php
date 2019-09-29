@@ -100,21 +100,25 @@ class MainController extends AbstractController {
 		for ( $i = 0; $i < $len_resp; $i ++ ) {
 			$key = rand( 0, $len - 1 );
 
-			$products_arr[] = [
-				'id'           => $products['$key']->getId(),
-				'name'         => $products['$key']->getName(),
-				'description'  => $products['$key']->getDescription(),
-				'price'        => $products['$key']->getPrice(),
-				'kitchen_type' => [
-					'id'   => $products['$key']->getKitchenType()->getId(),
-					'name' => $products['$key']->getKitchenType()->getName(),
-				],
-				'product_cat'  => [
-					'id' => $products['$key']->getProductCat()->getId(),
-					'id' => $products['$key']->getProductCat()->getName(),
-				],
-				'ves'          => $products['$key']->getVes(),
-			];
+			try {
+                $products_arr[] = [
+                    'id' => $products['$key']->getId(),
+                    'name' => $products['$key']->getName(),
+                    'description' => $products['$key']->getDescription(),
+                    'price' => $products['$key']->getPrice(),
+                    'kitchen_type' => [
+                        'id' => $products['$key']->getKitchenType()->getId(),
+                        'name' => $products['$key']->getKitchenType()->getName(),
+                    ],
+                    'product_cat' => [
+                        'id' => $products['$key']->getProductCat()->getId(),
+                        'id' => $products['$key']->getProductCat()->getName(),
+                    ],
+                    'ves' => $products['$key']->getVes(),
+                ];
+            } catch (Exception $exception){
+
+            }
 		}
 
 		$rest_arr = [

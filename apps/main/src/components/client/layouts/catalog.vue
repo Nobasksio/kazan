@@ -17,9 +17,8 @@
                 </div>
 
             </v-container>
-
+            <dostW></dostW>
         </v-content>
-
     </div>
 
 </template>
@@ -28,9 +27,12 @@
 
 import AppCommon from './../common/common'
 
+import dostW from './../common/dost-widget'
+
 export default {
   components: {
-      AppCommon
+      AppCommon,
+      dostW
   },
   data: () => ({
       drawer: true

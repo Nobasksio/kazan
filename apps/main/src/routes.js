@@ -40,6 +40,7 @@ const routes = [
         children: [
             {path: '/client/catalog/list', component: () => import('./components/client/pages/catalog-list.vue'),},
             {path: '/client/catalog/rest/:id', component: () => import('./components/client/pages/catalog-rest.vue'),},
+            {path: '/client/catalog/local/:id', component: () => import('./components/client/pages/local-page.vue'),},
         ]
     },
 
