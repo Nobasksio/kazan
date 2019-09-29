@@ -222,13 +222,12 @@ class MainController extends AbstractController {
 
         $rest = $restRepository->findOneBy(['id'=>$order_info['rest_id']]);
 
-        $station = $stationRepository->findOneBy(['id'=>$order_info['station_id']]);
+        $station = $stationRepository->findOneBy(['id'=>1]);
         $order->setStation($station);
 
         $order->setRest($rest);
         $order->setPhone($order_info['phone']);
         $order->setTrainId($order_info['train_route_id']);
-        $order->setDeliveryTime($order_info['delivery_time']);
         $order->setDeliveryTime($order_info['delivery_time']);
 
         $entityManager = $this->getDoctrine()->getManager();
