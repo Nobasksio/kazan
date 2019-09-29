@@ -2,15 +2,15 @@
 
     <div>
 
-        <HeaderApp>
+        <AppHeaderCommon></AppHeaderCommon>
 
-        </HeaderApp>
+        <TrainRouteHorizontal @change="onRouteChange" :routeId="currentRouteId" :routes="result.routes" v-if="result.routes.length>0"></TrainRouteHorizontal>
 
-        <TrainRouteHorizontal></TrainRouteHorizontal>
 
-        <div class="c-catalog">
+        <div class="c-catalog" v-if="result.rests.length">
 
             <div class="c-filters mb-1">
+
 
                 <v-tabs :show-arrows="false"
                         centered
@@ -21,13 +21,14 @@
 
                     <v-tab
                             :ripple="false"
+                            v-if="catsFiltered.length"
                     >
                         Все
                     </v-tab>
 
                     <v-tab :key="item.id"
                            :ripple="false"
-                           v-for="item in cats"
+                           v-for="item in catsFiltered"
                     >
                         {{item.title}}
                     </v-tab>
@@ -46,7 +47,7 @@
                             v-for="item in resultRestsFiltered"
                     >
 
-                        <v-img height="150px" src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
+                        <v-img height="150px" :src="`/images/rest${item.id}.jpg`"></v-img>
 
                         <v-card-text>
 
@@ -66,18 +67,17 @@
                                                 <path d="M6.84817 3.03927C6.98595 2.90499 7.03459 2.70791 6.97516 2.52471C6.91559 2.34151 6.76042 2.21073 6.56979 2.18298L4.87488 1.9367C4.80269 1.92619 4.74032 1.88092 4.70808 1.81546L3.95033 0.279776C3.86525 0.107229 3.69256 0 3.50011 0C3.3078 0 3.13511 0.107229 3.05003 0.279776L2.29214 1.8156C2.2599 1.88106 2.19739 1.92633 2.1252 1.93684L0.430287 2.18312C0.239799 2.21073 0.0844923 2.34165 0.0249209 2.52485C-0.0345105 2.70805 0.0141279 2.90513 0.151913 3.03941L1.37824 4.23476C1.43053 4.28578 1.4545 4.35923 1.44216 4.431L1.15285 6.1189C1.1272 6.26748 1.16617 6.41199 1.26233 6.52595C1.41175 6.70354 1.6726 6.75765 1.88117 6.64804L3.39695 5.85104C3.4603 5.81782 3.54006 5.8181 3.60327 5.85104L5.11919 6.64804C5.19292 6.68686 5.27156 6.70649 5.35271 6.70649C5.50087 6.70649 5.64132 6.64061 5.7379 6.52595C5.83419 6.41199 5.87302 6.2672 5.84737 6.1189L5.55792 4.431C5.54559 4.35909 5.56955 4.28578 5.62184 4.23476L6.84817 3.03927Z" fill="white"/>
                                             </svg>
 
-                                            {{item.rating}}
+                                            {{item.rating || 4.5}}
 
                                         </div>
 
                                     </div>
 
-
                                     <div class="c-item-price">
 
                                         Минимальная сумма заказа
 
-                                        <span class="value">{{item.min_price}} ₽</span>
+                                        <span class="value">{{item.min_price || 500}} ₽</span>
 
                                     </div>
 
@@ -121,22 +121,37 @@
 
         </div>
 
+        <div v-else>
+
+            <div class="text-center mt-10">
+
+                <v-progress-circular
+                        color="primary"
+                        indeterminate
+                ></v-progress-circular>
+
+            </div>
+
+        </div>
 
     </div>
 
 </template>
 
 <script>
-    import HeaderApp from './../common/header-app'
-    import TrainRouteHorizontal from './../common/train-route-horizontal'
+    import axios from 'axios'
+
+    import TrainRouteHorizontal from './../common/train/route-horizontal'
 
     export default {
         components: {
-            HeaderApp,
             TrainRouteHorizontal
         },
         data: () => ({
             pageTitle: 'Каталог',
+
+            currentRouteId: window.localStorage['currentRouteId'],
+            currentRouteStationName: window.localStorage['currentRouteStationName'],
 
             cats: [
                 {
@@ -153,19 +168,19 @@
                 },
                 {
                     id: 4,
-                    title: 'Горячее'
+                    title: 'Китайская'
                 },
                 {
                     id: 5,
-                    title: 'Категория 5'
+                    title: 'Итальянская'
                 },
                 {
                     id: 6,
-                    title: 'Категория 6'
+                    title: 'Русская'
                 },
                 {
                     id: 7,
-                    title: 'Категория 7'
+                    title: 'Восточная'
                 },
             ],
 
@@ -175,68 +190,116 @@
 
             result: {
 
-                rests: [
-                    {
-                        id: 1,
-                        name: 'Pizza Italy',
-                        rating: 3.4,
-                        min_price: 400,
-                        image: '',
-                        cats: [1]
-                    },
-                    {
-                        id: 2,
-                        name: 'Домино',
-                        rating: 4.4,
-                        min_price: 400,
-                        image: '',
-                        cats: [2]
-                    },
-
-                    {
-                        id: 3,
-                        name: 'Pizza Italy',
-                        rating: 3.4,
-                        min_price: 400,
-                        image: '',
-                        cats: [1]
-                    },
-                    {
-                        id: 4,
-                        name: 'Домино',
-                        rating: 4.4,
-                        min_price: 400,
-                        image: '',
-                        cats: [2]
-                    },
-                ]
+                loaded: false,
+                routes: [],
+                rests: []
             }
 
 
         }),
         computed: {
+
+            currentRoute() {
+                return this.result.routes.find((c)=> c.id == this.currentRouteId)
+            },
+
             filterCat() {
-                return this.clientFilters.catIndex ? this.cats[this.clientFilters.catIndex - 1] : null;
+                return this.clientFilters.catIndex ? this.catsFiltered[this.clientFilters.catIndex - 1] : null;
+            },
+
+
+            catsFiltered() {
+
+                return this.cats.filter((item) => {
+
+                    if (!this.resultRestsByRoute.length) {
+                        return false;
+                    } else {
+                        return !!this.resultRestsByRoute.find((rest)=> rest.cats.indexOf(item.id) > -1)
+                    }
+
+                });
+            },
+
+            resultRestsByRoute() {
+
+                return this.result.rests.filter((item) => {
+
+                    if (this.currentRoute) {
+
+                        return this.currentRoute.station_id && item.stations.indexOf(this.currentRoute.station_id) > -1;
+
+                    } else {
+                        return false;
+                    }
+
+                });
             },
 
             resultRestsFiltered() {
 
-                return this.result.rests.filter((item) => {
+                return this.resultRestsByRoute.filter((item) => {
 
-                    if (this.filterCat && item.cats.indexOf(this.filterCat.id) < 0) {
+                    if (this.filterCat && (item.cats.indexOf(this.filterCat.id) < 0)) {
                         return false;
                     }
 
                     return true;
                 });
+            },
+
+            restulLoaded() {
+
+                return this.result.routes.length > 0 && this.result.rests.length > 0;
             }
+        },
+
+        mounted() {
+
+            this.loadDataRoutes();
+            this.loadDataRests();
+
         },
 
         methods: {
 
             handleMenuItem() {
 
-            }
+            },
+
+            onRouteChange(item) {
+
+                this.currentRouteId = window.localStorage['currentRouteId'] = item.id;
+                this.currentRouteStationName = window.localStorage['currentRouteStationName'] = item.station_name;
+
+                this.clientFilters.catIndex = 0;
+
+            },
+
+            loadDataRoutes() {
+
+                axios.get(`/api/train/route`, {
+
+                    params: { train_id: window.localStorage['currentTrainId'] }
+
+                }).then(({data}) => {
+
+                    this.result.routes = data.routes
+
+                })
+            },
+
+            loadDataRests() {
+
+                axios.get(`/api/rest/list`, {
+
+
+                }).then(({data}) => {
+
+                    this.result.rests = data.rests
+
+                })
+            },
         }
     };
 </script>

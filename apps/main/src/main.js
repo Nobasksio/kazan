@@ -9,6 +9,7 @@ Vue.config.productionTip = false
 Vue.use(VueBus);
 Vue.use(VueRouter)
 
+
 import routes from './routes'
 
 const router = new VueRouter({
@@ -23,6 +24,8 @@ const store = typeof createStore === 'function'
     : createStore
 
 
+Vue.component('AppHeaderCommon', require('./components/client/common/app-header-common').default);
+Vue.component('AppHeaderBack', require('./components/client/common/app-header-back').default);
 
 new Vue({
   vuetify,
@@ -30,6 +33,8 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+
 
 
 require('./assets/style.scss')
