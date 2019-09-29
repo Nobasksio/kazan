@@ -12,18 +12,23 @@
                           nextButton: '.next-slide',
                           prevButton: '.prev-slide',
                           centeredSlides: true,
+                          initialSlide: currentSlideId,
+
                     }"
                     class="swiper-wrapper c-timeline"
+                    v-if="routeId"
+                    @slideChange="onSlide"
+                    ref="swiper"
             >
 
-                <swiper-slide v-for="station in stations">
+                <swiper-slide v-for="item in routes">
 
                     <div class="с-item-name">
-                        {{station.name}}
+                        {{item.station_name}}
                     </div>
 
                     <div class="с-item-time">
-                        <span>{{station.time}}</span>
+                        <span>{{ moment(parseInt(item.arrival_time) * 1000).format('HH:mm') }}</span>
                     </div>
 
                 </swiper-slide>
@@ -41,7 +46,13 @@
 
     import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
+    const moment = require('moment')
+
     export default {
+        props:{
+            routeId: {},
+            routes: {},
+        },
         components: {
             swiper,
             swiperSlide
@@ -82,12 +93,39 @@
             }
         },
         methods: {
+            moment: function (data) {
+                return moment(data);
+            },
+
             make_choose(id_station) {
 
 
+            },
+
+            onSlide() {
+
+                let route = this.routes[this.$refs.swiper.swiper.activeIndex];
+
+                if (route)
+                    this.$emit('change', route)
+
             }
         },
-        name: "path-choose"
+        computed: {
+            currentSlideId() {
+
+                if (this.routeId) {
+
+                    let currentRoute = this.routes.find((c)=> c.id == this.routeId)
+
+                    if (currentRoute) {
+                        return this.routes.indexOf(currentRoute);
+                    }
+                }
+
+                return 0;
+            }
+        }
     }
 </script>
 
@@ -107,6 +145,7 @@
         font-size: 14px;
         line-height: 1;
         color: #BDBDBD;
+        white-space: nowrap;
     }
 
     .с-item-time {
