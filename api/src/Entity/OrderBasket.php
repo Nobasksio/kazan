@@ -41,7 +41,7 @@ class OrderBasket
         return $this->order_entity;
     }
 
-    public function setOrderEntity(?Order $order_entity): self
+    public function setOrderEntity(?OrderEntity $order_entity): self
     {
         $this->order_entity = $order_entity;
 
