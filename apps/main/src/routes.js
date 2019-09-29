@@ -22,7 +22,7 @@ const routes = [
             {path: '/client/catalog/list', component: () => import('./components/client/pages/catalog-list.vue'),},
             {path: '/client/catalog/rest/:id', component: () => import('./components/client/pages/catalog-rest.vue'),},
             {path: '/client/catalog/local/:id', component: () => import('./components/client/pages/local-page.vue'),},
-            {path: '/client/catalog/local/', component: () => import('./components/client/pages/local-page.vue'),},
+            {path: '/client/catalog/thanks', component: () => import('./components/client/layouts/thank-you.vue'),},
         ]
     },
 

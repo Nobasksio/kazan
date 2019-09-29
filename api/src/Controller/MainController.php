@@ -116,8 +116,8 @@ class MainController extends AbstractController {
                 $ct_id = $products[$key]->getProductCat()->getId();
                 $ct_name = $products[$key]->getProductCat()->getName();
             } else {
-                $kt_id = null;
-                $kt_name = null;
+                $ct_id = null;
+                $ct_name = null;
             }
 			$products_arr[] = [
 				'id'           => $products[$key]->getId(),
@@ -126,7 +126,7 @@ class MainController extends AbstractController {
 				'price'        => $products[$key]->getPrice(),
 				'kitchen_type' => [
 					'id'   => $kt_id,
-					'name' => $products[$key]->getKitchenType()->getName(),
+					'name' => $kt_name,
 				],
 				'product_cat'  => [
 					'id' => $ct_id,
