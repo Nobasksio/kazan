@@ -26,6 +26,11 @@ class OrderBasket
      */
     private $quantity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $product_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class OrderBasket
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getProductId(): ?int
+    {
+        return $this->product_id;
+    }
+
+    public function setProductId(int $product_id): self
+    {
+        $this->product_id = $product_id;
 
         return $this;
     }

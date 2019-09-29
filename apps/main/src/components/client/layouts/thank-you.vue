@@ -5,7 +5,7 @@
     <v-row class="flex-column justify-space-around h-100">
         <v-col class="text-center align-self-center">
             <div class="pt-10">Спасибо! <br>
-           
+
             Номер вашего заказа
             </div>
         </v-col>

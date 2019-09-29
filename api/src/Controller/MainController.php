@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\OrderBasket;
+use App\Entity\OrderEntity;
 use App\Entity\Rest;
 use App\Entity\TrainRoute;
 use App\Repository\KitchenTypeRepository;
@@ -206,4 +208,47 @@ class MainController extends AbstractController {
 		return JsonResponse::fromJsonString( $response );
 
 	}
+    public function confirm( Request $request,
+                             StationRepository $stationRepository,
+                             RestRepository $restRepository) {
+        $order_info = $request->request->get('order');
+
+
+        $order_info = json_decode(json_encode(json_decode($order_info)), true);
+
+
+        $order = new OrderEntity();
+
+        $rest = $restRepository->findOneBy(['id'=>$order_info['rest_id']]);
+
+        $station = $stationRepository->findOneBy(['id'=>$order_info['station_id']]);
+        $order->setStation($station);
+
+        $order->setRest($rest);
+        $order->setPhone($order_info['phone']);
+        $order->setTrainId($order_info['train_route_id']);
+        $order->setDeliveryTime($order_info['delivery_time']);
+        $order->setDeliveryTime($order_info['delivery_time']);
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->persist($order);
+
+
+        $entityManager->flush();
+        foreach ($order_info['basket'] as $basket_item){
+            $basket = new OrderBasket();
+
+            $basket->setOrderEntity($order);
+
+            $basket->setProductId($basket_item['product_id']);
+            $basket->setOrderEntity($basket_item['quantity']);
+
+            $entityManager->persist($basket);
+        }
+
+        $entityManager->flush();
+
+    }
+
 }

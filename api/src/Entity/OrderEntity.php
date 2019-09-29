@@ -38,6 +38,26 @@ class OrderEntity
      */
     private $orderBaskets;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Station", inversedBy="orderEntities")
+     */
+    private $station;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $train_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $delivery_time;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phone;
+
     public function __construct()
     {
         $this->orderBaskets = new ArrayCollection();
@@ -111,6 +131,54 @@ class OrderEntity
                 $orderBasket->setOrderEntity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStation(): ?Station
+    {
+        return $this->station;
+    }
+
+    public function setStation(?Station $station): self
+    {
+        $this->station = $station;
+
+        return $this;
+    }
+
+    public function getTrainId(): ?int
+    {
+        return $this->train_id;
+    }
+
+    public function setTrainId(int $train_id): self
+    {
+        $this->train_id = $train_id;
+
+        return $this;
+    }
+
+    public function getDeliveryTime(): ?int
+    {
+        return $this->delivery_time;
+    }
+
+    public function setDeliveryTime(int $delivery_time): self
+    {
+        $this->delivery_time = $delivery_time;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }
